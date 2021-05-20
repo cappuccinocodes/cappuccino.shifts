@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "personal-tracker-5cd0f": {
+      "hosting": {
+        "app": [
+          "personal-tracker-5cd0f"
+        ]
+      }
+    }
+  }
+}

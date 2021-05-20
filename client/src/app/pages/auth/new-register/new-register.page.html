@@ -1,0 +1,41 @@
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Signup
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+<form [formGroup]="user" (ngSubmit)="registerUser(user)">
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">E-mail</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="user.controls.email.invalid && user.controls.email.dirty" lines="none">
+      <ion-text color="danger">Please provide a valid e-mail</ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+
+    <ion-row no-padding>
+      <ion-col size="12">
+        <ion-button [disabled]="user.invalid" expand="full" color="success" type="submit">
+          <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row no-padding>
+      <ion-col size="12">
+        <ion-text>Already have an account? <span routerDirection="root" [routerLink]="['/', 'new-login']">Click Here</span></ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+</form>
+    </ion-card-content>
+  </ion-card>

@@ -1,0 +1,180 @@
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Update Shift
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+
+      <ion-row no-padding>
+        <ion-col size="4">
+          <ion-item>
+            <ion-datetime minuteValues="0,5,10,15,20,25,30,35,45,50,55"
+            (ionChange)="setMinEndDate($event)"
+            placeholder="End" displayFormat="H:mm" pickerFormat="DD MMM YYYY H:mm" [(ngModel)]="shift.start1">
+            </ion-datetime>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="4">
+          <ion-item>
+            <ion-datetime minuteValues="0,5,10,15,20,25,30,35,45,50,55" placeholder="End" displayFormat="H:mm" [min]="minTime" pickerFormat="DD MMM YYYY H:mm" [(ngModel)]="shift.end1">
+            </ion-datetime>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="4">
+          <ion-item>
+            <ion-select placeholder="Pen" [(ngModel)]="shift.penalty1">
+
+              <ion-select-option *ngFor="let pen of penalties" [value]="pen.value">
+
+                {{ pen.display }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <div *ngIf="isPenalty2">
+        <ion-row no-padding>
+          <ion-col size="4">
+            <ion-item>
+              <ion-datetime
+              (ionChange)="setMinEndDate2($event)"
+              placeholder="Start" display-format="H:mm" picker-Format="DD MMM YYYY H:mm" [(ngModel)]="shift.start2">
+              </ion-datetime>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item>
+
+              <ion-datetime minuteValues="0,5,10,15,20,25,30,35,45,50,55" placeholder="End" display-format="H:mm" [min]="minTime2" picker-Format="DD MMM YYYY H:mm" [(ngModel)]="shift.end2">
+              </ion-datetime>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item>
+              <ion-select placeholder="Pen" [(ngModel)]="shift.penalty2">
+
+                <ion-select-option *ngFor="let pen of penalties" [value]="pen.value">
+
+                  {{ pen.display }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+
+        </ion-row>
+
+      </div>
+
+      <div *ngIf="isPenalty3">
+        <ion-row no-padding>
+          <ion-col size="4">
+            <ion-item>
+              <ion-datetime
+              (ionChange)="setMinEndDate3($event)"
+              placeholder="Start" display-format="H:mm" picker-Format="DD MMM YYYY H:mm" [(ngModel)]="shift.start3">
+              </ion-datetime>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item>
+              <ion-datetime minuteValues="0,5,10,15,20,25,30,35,45,50,55" placeholder="End" display-format="H:mm" [min]="minTime3" picker-Format="DD MMM YYYY H:mm" [(ngModel)]="shift.end3">
+              </ion-datetime>
+            </ion-item>
+          </ion-col>
+
+
+          <ion-col size="4">
+            <ion-item>
+              <ion-select [(ngModel)]="shift.penalty3" placeholder="Pen">
+
+                <ion-select-option *ngFor="let pen of penalties" [value]="pen.value">
+
+                  {{ pen.display }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+        </ion-row>
+      </div>
+
+
+
+<ion-row no-padding>
+
+  <ion-col size="6">
+    <ion-item>
+      <ion-label position="stacked">Rate</ion-label>
+      <ion-input [(ngModel)]=shift.rate type="number"></ion-input>
+    </ion-item>
+  </ion-col>
+
+  <ion-col size="6">
+    <ion-item>
+      <ion-label position="stacked">Status</ion-label>
+      <ion-select [(ngModel)]=shift.paid placeholder="Select">
+        <ion-row no-padding>
+          <ion-col>
+            <ion-select-option [value]="true">Paid</ion-select-option>
+            <ion-select-option [value]="false">Unpaid</ion-select-option>
+          </ion-col>
+        </ion-row>
+      </ion-select>
+    </ion-item>
+  </ion-col>
+
+  <ion-col size="12">
+    <ion-item>
+      <ion-label position="stacked">Employer</ion-label>
+      <ion-select [(ngModel)]="shift.employerId" placeholder="{{ employerPlaceholder }}">
+        <ion-row no-padding>
+          <ion-col>
+            <ion-select-option *ngFor="let emp of employers" [value]="emp.id">
+
+              {{ emp.name }}</ion-select-option>
+          </ion-col>
+        </ion-row>
+      </ion-select>
+    </ion-item>
+  </ion-col>
+
+  <ion-col size="12">
+    <ion-item>
+      <ion-label position="stacked">Location</ion-label>
+      <ion-select [(ngModel)]="shift.locationId" placeholder="{{ locationPlaceholder }}">
+        <ion-row no-padding>
+          <ion-col>
+            <ion-select-option *ngFor="let loc of locations" [value]="loc.id">
+
+              {{ loc.name }}</ion-select-option>
+          </ion-col>
+        </ion-row>
+      </ion-select>
+    </ion-item>
+  </ion-col>
+</ion-row>
+
+      <ion-row no-padding>
+        <ion-col size="6">
+          <ion-button expand="full" color="danger" (click)="close()">
+            <ion-icon name="close" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="full" color="success" (click)="updateShift()"
+            [disabled]="shift.employerId == 0 || shift.employerId == 0">
+            <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-icon slot="start" name="arrow-back" [routerLink]="['/', 'menu', 'shifts-list']"></ion-icon>
+    </ion-buttons>
+    <ion-title>Help</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1 class="main-title">Welcome To Shift Tracker!</h1>
+  <ion-list>
+
+    <ion-item>
+      <ion-text class="help-body">
+        <ion-label class="title">Adding a Shift</ion-label>
+        <p>
+          To Add a Shift, click on <span><ion-icon name="add"></ion-icon> on the toolbar</span>. A shift has the following required properties: <span class="span-bold">Start</span> and <span class="span-bold">End Time</span>, base <span class="span-bold">Rate</span>, <span class="span-bold">Employer</span>,  <span class="span-bold">Location</span> and payment <span class="span-bold">Status</span>.
+        </p>
+        <p>
+          It can also have up to three different <span class="span-bold">Penalty Rates</span>. Click on <span class="span-bold">Add Penalty</span> to include a different penalty rate in a different time within a shift.
+        </p>
+        <p>
+          To add and delete a location or employer, click on Manage Location or Manage Employer. You need to add at least one employer and one location before adding a shift.
+        </p>
+        <p>
+          <span class="span-bold">Careful!</span> When deleting a location or employer, you'll delete all shifts associated with it.
+        </p>
+      </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-text class="help-body">
+        <ion-label class="title">Filters</ion-label>
+        <p>
+          You can visualise your shifts using filters. Our current filter options are <span>By Employer</span>, <span class="span-bold">By Location</span>, <span class="span-bold">By Date</span>,  <span class="span-bold">By Date and Category</span>and <span class="span-bold">By Status</span> . Click on <span class="span-bold">Show All Shifts</span> to display all records.
+        </p>
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-text class="help-body">
+      <ion-label class="title">Logging Out</ion-label>
+      <p>
+        You'll remain logged in if you close a tab or your browser. To log out, click on <span><ion-icon name="menu"></ion-icon> on the toolbar</span>.
+      </p>
+    </ion-text>
+  </ion-item>
+</ion-content>

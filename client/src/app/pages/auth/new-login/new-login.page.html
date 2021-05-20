@@ -1,0 +1,41 @@
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+       Login
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+<form [formGroup]="user" (ngSubmit)="loginUser(user)">
+  <ion-item>
+    <ion-label position="stacked">E-mail</ion-label>
+    <ion-input formControlName="email" type="email"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="emailErrorBoolean" lines="none">
+    <ion-text color="danger">{{ emailError }} </ion-text>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Password</ion-label>
+    <ion-input formControlName="password" type="password"></ion-input>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-text color="danger">{{ passwordError }} </ion-text>
+  </ion-item>
+
+  <ion-row no-padding>
+    <ion-col size="12">
+      <ion-button expand="full" color="success" type="submit">
+        <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row no-padding>
+    <ion-col size="12">
+      <ion-text>Don't have an account? <span routerDirection="root" [routerLink]="['/', 'new-register']">Click Here</span></ion-text>
+    </ion-col>
+  </ion-row>
+</form>
+    </ion-card-content>
+  </ion-card>

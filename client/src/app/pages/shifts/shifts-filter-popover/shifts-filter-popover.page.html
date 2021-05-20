@@ -1,0 +1,82 @@
+<ion-list>
+
+  <ion-row no-padding>
+
+    <ion-col size="12">
+      <ion-button *ngIf="!selectByEmployer && !selectByDate && !selectByDateAndEmployer && !selectByStatus" expand="block" color="primary"
+    (click)="onSelectByEmployer()">By Employer</ion-button>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-button *ngIf="!selectByEmployer && !selectByDate && !selectByDateAndEmployer && !selectByStatus" expand="block" color="primary"
+      (click)="onSelectByDate()">By Date</ion-button>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-button *ngIf="!selectByEmployer && !selectByDate && !selectByDateAndEmployer && !selectByStatus" expand="block" color="primary"
+    (click)="onSelectByDateAndEmployer()">By Date and Employer</ion-button>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-button *ngIf="!selectByEmployer && !selectByDate && !selectByDateAndEmployer && !selectByStatus" expand="block" color="primary"
+    (click)="onSelectByStatus()">By Status</ion-button>
+    </ion-col>
+
+
+
+  </ion-row>
+
+  <div *ngIf="selectByEmployer || selectByDateAndEmployer">
+    <ion-item>
+      <ion-label position="stacked">Employer</ion-label>
+      <ion-select placeholder="{{ placeHolder }}" (ionChange)="select($event)" value="TESTE">
+        <ion-row no-padding>
+        <ion-col>
+          <ion-select-option *ngFor="let emp of employers" [value]="[emp]">{{ emp.name }}</ion-select-option>
+        </ion-col>
+      </ion-row>
+      </ion-select>
+    </ion-item>
+
+  </div>
+
+
+  <div *ngIf="selectByDate || selectByDateAndEmployer">
+    <ion-item>
+      <ion-label position="stacked">Date Start</ion-label>
+      <ion-datetime (ionChange)="setMinEndDate($event)" display-format="MM/DD/YYYY" picker-Format="DD MMM YYYY" [(ngModel)]="dateStart"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Date End</ion-label>
+      <ion-datetime display-format="MM/DD/YYYY" [min]="minTime" picker-Format="DD MMM YYYY" [(ngModel)]="dateEnd"></ion-datetime>
+    </ion-item>
+  </div>
+
+  <div *ngIf="selectByStatus">
+    <ion-item>
+      <ion-label position="stacked">Status</ion-label>
+      <ion-select [(ngModel)]=status placeholder="Select">
+        <ion-row no-padding>
+          <ion-col>
+            <ion-select-option [value]="true">Paid</ion-select-option>
+            <ion-select-option [value]="false">Unpaid</ion-select-option>
+          </ion-col>
+        </ion-row>
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <ion-row no-padding>
+
+    <ion-col size="12">
+      <ion-button *ngIf="selectByEmployer || selectByDate || selectByDateAndEmployer || selectByStatus" expand="block" color="success" (click)="filter()">Filter</ion-button>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-button *ngIf="!selectByEmployer && !selectByDate && !selectByDateAndEmployer && !selectByStatus" expand="block" color="danger"
+    (click)="onShowAllRecords()">Show All Shifts</ion-button>
+    </ion-col>
+
+  </ion-row>
+
+</ion-list>

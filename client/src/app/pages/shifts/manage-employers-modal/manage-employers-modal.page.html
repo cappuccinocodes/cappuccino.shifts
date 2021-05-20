@@ -1,0 +1,86 @@
+
+
+<ion-card>
+
+  <ion-card-header>
+    <ion-card-title>
+      Manage Employers
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <div *ngIf="!deletingEmployers">
+    <ion-item>
+      <ion-label position="stacked">Name</ion-label>
+      <ion-input [(ngModel)]=employer.name type="text"></ion-input>
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-label position="stacked">Choose Icon</ion-label>
+      <ion-row no-padding>
+        <ion-col *ngFor="let i of icons" size="4" text-center>
+          <ion-button expand="block" fill="clear"
+          (click)="employer.icon = i"
+          [color]="employer.icon == i ? 'primary' : 'medium'">
+            <ion-icon slot="icon-only" [name]="i"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-item> -->
+
+    <ion-row no-padding>
+      <ion-col size="6">
+        <ion-button expand="full" color="danger" (click)="close()">
+          <!-- <ion-icon name="close" slot="icon-only"></ion-icon> -->
+          Close
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" color="success" (click)="addEmployer()"
+          [disabled]="employer.name == '' ">
+          Add
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row no-padding>
+      <ion-col size="12">
+        <ion-button expand="full" color="primary" (click)="displayDeleteEmployer()">
+          Delete Employer
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div *ngIf="deletingEmployers">
+    <ion-item>
+      <ion-label position="stacked">Employer</ion-label>
+      <ion-select placeholder="{{ deleteEmployerPlaceholder }}" [(ngModel)]="employer.id" placeholder="Select One" (ionChange)="getEmployerIndexForDeletion($event)">
+        <ion-row no-padding>
+        <ion-col>
+          <ion-select-option *ngFor="let emp of employers" [value]="[emp.id, emp.name]" (ionSelect)="employerToDelete = emp.id">{{ emp.name }}</ion-select-option>
+        </ion-col>
+      </ion-row>
+      </ion-select>
+    </ion-item>
+
+    <ion-row no-padding>
+      <ion-col size="6">
+        <ion-button expand="full" color="danger" (click)="closeDeleteEmployer()">
+          Close
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" color="success" (click)="deleteEmployer()">
+          Delete
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+  </ion-card-content>
+</ion-card>
+
+
+

@@ -1,0 +1,43 @@
+<ion-menu contenId="content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+
+
+        <ion-menu-toggle style="cursor: pointer">
+          <ion-item routerDirection="root" [routerLink]="['/', 'menu', 'shifts-list']">
+            <ion-icon name="medkit" slot="start"></ion-icon>
+            <ion-label>
+              Shifts
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle style="cursor: pointer">
+          <ion-item routerDirection="root" [routerLink]="['/', 'menu', 'help']">
+            <ion-icon name="help" slot="start"></ion-icon>
+            <ion-label>
+              Help
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle (click)="logout()" style="cursor: pointer">
+          <ion-item routerDirection="root">
+            <ion-icon name="logout" slot="start"></ion-icon>
+            <ion-label>
+              Logout
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="content" main></ion-router-outlet>

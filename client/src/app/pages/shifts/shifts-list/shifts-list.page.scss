@@ -1,0 +1,42 @@
+p {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: blue;
+}
+
+ion-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+ion-toolbar {
+  font-size: 18px;
+  font-weight: 700;
+  justify-content: center;
+}
+
+.date {
+  color: black;
+}
+
+.money {
+  color: #689f38;
+  font-weight: 700;
+}
+
+.paid {
+  color: blue
+}
+
+.unpaid {
+  color: red;
+}
+
+ion-footer {
+  text-align: center;
+}

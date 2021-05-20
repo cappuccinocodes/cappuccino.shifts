@@ -1,0 +1,4 @@
+{
+    "appService.deploySubpath": "bin/Release/net5.0/publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/143f233f-cb80-4c9d-8d29-2541911187e4/resourceGroups/Cappuccino-RG/providers/Microsoft.Web/sites/cappuccinoshiftsserver"
+}

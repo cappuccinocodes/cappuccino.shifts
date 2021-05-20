@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Shift List</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/', 'menu', 'help']">
+        <ion-icon name="help" slot="icon-only"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="openFilter($event)">
+        <ion-icon name="funnel" slot="icon-only"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="addShift()">
+        <ion-icon name="add" slot="icon-only"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list #slidingList>
+    <ion-item-sliding *ngFor="let shift of shifts; let i = index">
+      <ion-item>
+        <!-- <ion-icon [name]="trans.category.icon" slot="start" class="category-icon"></ion-icon> -->
+        <ion-label>
+          <h2>{{ shift.employer.name }}</h2>
+          <p class="date">
+            {{shift.start1 | date: 'MMM dd'}}
+          </p>
+        </ion-label>
+        <ion-text class="money" slot="end">
+          <p>$ {{shift.money}}</p>
+        </ion-text>
+
+        <ion-text slot="end">
+          <p class="paid" *ngIf="shift.paid">​​​P</p>
+          <p class="unpaid" *ngIf="!shift.paid">U</p>
+        </ion-text>
+      </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option (click)="updateShift(shift.id)" color="primary">
+            <ion-icon name="open" slot="icon-only"></ion-icon>
+          </ion-item-option>
+          <ion-item-option (click)="removeShift(shift.id)" color="danger">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+
+
+
+    </ion-item-sliding>
+
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="secondary" text-center>
+    <b>{{ cashFlow | currency }}</b>
+  </ion-toolbar>
+</ion-footer>

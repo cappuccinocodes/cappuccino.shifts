@@ -1,0 +1,30 @@
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Signup
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input [(ngModel)]="user.email" placeholder="Your email" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input [(ngModel)]="user.password" placeholder="Your password" type="password"></ion-input>
+      </ion-item>
+
+      <ion-row no-padding>
+        <ion-col size="12">
+          <ion-button expand="full" color="success" (click)="signup()">
+            <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+
+    </ion-card-content>
+  </ion-card>
