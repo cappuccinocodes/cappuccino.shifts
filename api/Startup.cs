@@ -59,12 +59,12 @@ namespace api
             services.AddCors(opt => opt.AddPolicy("CorsPolicy",
             policy =>
                         {
-                            policy.WithOrigins("http://cappuccinoshifts.azurewebsites.net", "https://cappuccinoshifts.azurewebsites.net")
-                                  .AllowAnyMethod()
-                                  .AllowAnyHeader();
+                            // policy.WithOrigins("http://cappuccinoshifts.azurewebsites.net", "https://cappuccinoshifts.azurewebsites.net")
+                            //       .AllowAnyMethod()
+                            //       .AllowAnyHeader();
 
 
-                            // policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:8100", "http://localhost:8101" );
+                            policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:8100", "http://localhost:8101" );
                         }));
 
 //                         services.AddCors(options =>

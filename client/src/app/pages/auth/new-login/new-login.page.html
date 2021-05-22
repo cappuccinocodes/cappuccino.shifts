@@ -33,7 +33,11 @@
 
   <ion-row no-padding>
     <ion-col size="12">
-      <ion-text>Don't have an account? <span routerDirection="root" [routerLink]="['/', 'new-register']">Click Here</span></ion-text>
+      <ion-text>Don't have an account? <span class="click-here" routerDirection="root" [routerLink]="['/', 'new-register']">Click Here</span></ion-text>
+    </ion-col>
+
+    <ion-col size="12">
+      <ion-text>Don't want to register? <span class="click-here" (click)="guestLogin()">Enter as Guest</span></ion-text>
     </ion-col>
   </ion-row>
 </form>

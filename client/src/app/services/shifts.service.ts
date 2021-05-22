@@ -97,7 +97,7 @@ export class ShiftsService {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    return this.http.post(this.rootURL + '/location', location, httpOptions);
+    return this.http.post(this.rootURL + '/locations', location, httpOptions);
   }
 
   deleteShift(id) {

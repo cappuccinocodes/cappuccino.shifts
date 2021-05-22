@@ -10,10 +10,13 @@ import { AuthService, User } from 'src/app/services/auth.service';
 export class NewRegisterPage implements OnInit {
   user: FormGroup;
 
+  guestEmail = 'admin@admin.com';
+  guestPassword = 'admin1';
+
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.user = this.fb.group({
-      email: ['Your e-mail', [Validators.required, Validators.email]],
-      password: ['Your password']
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   };
 
@@ -22,6 +25,9 @@ export class NewRegisterPage implements OnInit {
   registerUser(fb) {
     this.authService.registerUser(fb.value);
     console.log('email ' + fb.value.email);
+  };
 
-  }
+  guestLogin() {
+    this.authService.login({email: this.guestEmail, password: this.guestPassword});
+  };
 }

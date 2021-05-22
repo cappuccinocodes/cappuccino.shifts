@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { getMaxListeners } from 'process';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -17,14 +18,17 @@ export class NewLoginPage implements OnInit, OnDestroy{
   passwordError = '';
   emailError = '';
 
+  guestEmail = 'admin@admin.com';
+  guestPassword = 'admin1';
+
   emailErrorBoolean = false;
   passwordErrorBoolean = false;
 
 
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.user = this.fb.group({
-      email: ['Your e-mail', [Validators.required, Validators.email]],
-      password: ['Your password']
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   };
 
@@ -38,8 +42,12 @@ export class NewLoginPage implements OnInit, OnDestroy{
 
   loginUser(fb) {
     this.authService.login(fb.value);
-    console.log('user: ' + fb.value);
+    console.log('user: ' + fb.value.email);
     console.log(' message string ' + this.authMessage);
+  }
+
+  guestLogin() {
+    this.authService.login({email: this.guestEmail, password: this.guestPassword});
   }
 
   showErrorCode() {

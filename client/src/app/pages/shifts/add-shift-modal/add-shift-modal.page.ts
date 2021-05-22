@@ -19,6 +19,9 @@ export class AddShiftModalPage implements OnInit {
   start2WasSelected = false;
   start3WasSelected = false;
 
+  rateError = false;
+  disableButton = true;
+
   fixDate = new Date().toISOString();
 
   minTime = '2019-12-19';
@@ -41,8 +44,8 @@ export class AddShiftModalPage implements OnInit {
 
 
   shift: Shift = {
-    employerId: 1,
-    locationId: 1,
+    employerId: 0,
+    locationId: 0,
     start1: new Date().toLocaleString('en-US', {timeZone: 'Australia/Brisbane'}),
     end1: new Date().toLocaleString('en-US', {timeZone: 'Australia/Brisbane'}),
     penalty1: 0,
@@ -54,7 +57,7 @@ export class AddShiftModalPage implements OnInit {
     start3: new Date().toLocaleString('en-US', {timeZone: 'Australia/Brisbane'}),
     end3: new Date().toLocaleString('en-US', {timeZone: 'Australia/Brisbane'}),
     penalty3: 0,
-    rate: 0,
+    rate: 1,
     paid: false
   };
 
@@ -184,4 +187,19 @@ export class AddShiftModalPage implements OnInit {
     this.minTime3 = event.detail.value;
   }
 
+  getRate(ev: any) {
+    if (ev.target.value <= 0) {
+      console.log('wrong' + this.disableButton);
+      this.disableButton = true;
+      this.rateError = true;
+    } else {
+      console.log('right' + this.disableButton);
+      this.disableButton = false;
+      this.rateError = false;
+    }
+  }
+
+  getStatus(ev: any) {
+    // this.disableButton = false;
+}
 }

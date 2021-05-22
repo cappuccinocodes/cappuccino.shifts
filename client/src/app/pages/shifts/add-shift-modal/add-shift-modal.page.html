@@ -12,6 +12,7 @@
       <ion-row no-padding>
         <ion-col size="4">
           <ion-item>
+            <ion-label position="stacked">Start</ion-label>
             <ion-datetime
             minuteValues="0,5,10,15,20,25,30,35,45,50,55"
             (ionChange)="setMinEndDate($event)"
@@ -22,6 +23,7 @@
 
         <ion-col size="4">
           <ion-item>
+            <ion-label position="stacked">End</ion-label>
             <ion-datetime
             minuteValues="0,5,10,15,20,25,30,35,45,50,55" [disabled]="!startWasSelected" placeholder="End" displayFormat="H:mm" [min]="minTime" pickerFormat="DD MMM YYYY H:mm" [(ngModel)]="shift.end1">
             </ion-datetime>
@@ -30,7 +32,8 @@
 
         <ion-col size="4">
           <ion-item>
-            <ion-select placeholder="Pen" [(ngModel)]="shift.penalty1">
+            <ion-label position="stacked">Penalty</ion-label>
+            <ion-select placeholder="Select" [(ngModel)]="shift.penalty1">
 
               <ion-select-option *ngFor="let pen of penalties" [value]="pen.value">
 
@@ -44,6 +47,7 @@
         <ion-row no-padding>
           <ion-col size="4">
             <ion-item>
+              <ion-label position="stacked">Start</ion-label>
               <ion-datetime
               minuteValues="0,5,10,15,20,25,30,35,45,50,55"
               (ionChange)="setMinEndDate2($event)"
@@ -54,7 +58,7 @@
 
           <ion-col size="4">
             <ion-item>
-
+              <ion-label position="stacked">End</ion-label>
               <ion-datetime
               minuteValues="0,5,10,15,20,25,30,35,45,50,55" [disabled]="!start2WasSelected" placeholder="End" display-format="H:mm" [min]="minTime2" picker-Format="DD MMM YYYY H:mm" [(ngModel)]="shift.end2">
               </ion-datetime>
@@ -81,16 +85,18 @@
         <ion-row no-padding>
           <ion-col size="4">
             <ion-item>
+              <ion-label position="stacked">Start</ion-label>
               <ion-datetime
               minuteValues="0,5,10,15,20,25,30,35,45,50,55"
               (ionChange)="setMinEndDate3($event)"
-              placeholder="Start" display-format="H:mm" picker-Format="DD MMM YYYY H:mm" [(ngModel)]="shift.start3">
+              placeholder="Start" display-format="H:mm" picker-Format="DD MMM YYYY H:mm" (ngModel)="shift.start3">
               </ion-datetime>
             </ion-item>
           </ion-col>
 
           <ion-col size="4">
             <ion-item>
+              <ion-label position="stacked">End</ion-label>
               <ion-datetime
               minuteValues="0,5,10,15,20,25,30,35,45,50,55" [disabled]="!start3WasSelected" placeholder="End" display-format="H:mm" [min]="minTime3" picker-Format="DD MMM YYYY H:mm" [(ngModel)]="shift.end3">
               </ion-datetime>
@@ -100,7 +106,7 @@
 
           <ion-col size="4">
             <ion-item>
-              <ion-select [(ngModel)]="shift.penalty3" placeholder="Pen">
+              <ion-select (ngModel)="shift.penalty3" placeholder="Pen">
 
                 <ion-select-option *ngFor="let pen of penalties" [value]="pen.value">
 
@@ -119,14 +125,17 @@
   <ion-col size="6">
     <ion-item>
       <ion-label position="stacked">Rate</ion-label>
-      <ion-input [(ngModel)]=shift.rate type="number"></ion-input>
+      <ion-input (ionChange)="getRate($event)" placeholder="Add Rate" (ngModel)=shift.rate type="number" min="1" [value]="[shift.rate]"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="rateError" lines="none">
+      <ion-text color="danger">Minimum rate is 1</ion-text>
     </ion-item>
   </ion-col>
 
   <ion-col size="6">
     <ion-item>
       <ion-label position="stacked">Status</ion-label>
-      <ion-select [(ngModel)]=shift.paid placeholder="Select">
+      <ion-select (ionChange)="getStatus($event)" placeholder="Select" (ngModel)=shift.paid>
         <ion-row no-padding>
           <ion-col>
             <ion-select-option [value]="true">Paid</ion-select-option>
@@ -193,7 +202,8 @@
         </ion-col>
         <ion-col size="6">
           <ion-button expand="full" color="success" (click)="addShift()"
-            [disabled]="shift.employerId == 0 || shift.employerId == 0">
+            [disabled]="disableButton"
+            >
             <ion-icon name="checkmark" slot="icon-only"></ion-icon>
           </ion-button>
         </ion-col>
