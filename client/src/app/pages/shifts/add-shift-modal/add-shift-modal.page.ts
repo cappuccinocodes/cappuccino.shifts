@@ -1,7 +1,11 @@
-
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
-import { Employer, Location, Shift, ShiftsService } from 'src/app/services/shifts.service';
+import {
+  Employer,
+  Location,
+  Shift,
+  ShiftsService,
+} from 'src/app/services/shifts.service';
 import { ManageEmployersModalPage } from '../manage-employers-modal/manage-employers-modal.page';
 import { ManageLocationsModalPage } from '../manage-locations-modal/manage-locations-modal.page';
 
@@ -38,27 +42,37 @@ export class AddShiftModalPage implements OnInit {
     { value: 1.75, display: '75%' },
     { value: 2, display: '100%' },
     { value: 2.5, display: '150%' },
-    { value: 3, display: '200%' }
+    { value: 3, display: '200%' },
   ];
-  //createdAt = new Date();
-
 
   shift: Shift = {
     employerId: 0,
     locationId: 0,
-    start1: new Date().toLocaleString('en-US', {timeZone: 'Australia/Brisbane'}),
-    end1: new Date().toLocaleString('en-US', {timeZone: 'Australia/Brisbane'}),
+    start1: new Date().toLocaleString('en-US', {
+      timeZone: 'Australia/Brisbane',
+    }),
+    end1: new Date().toLocaleString('en-US', {
+      timeZone: 'Australia/Brisbane',
+    }),
     penalty1: 0,
 
-    start2: new Date().toLocaleString('en-US', {timeZone: 'Australia/Brisbane'}),
-    end2: new Date().toLocaleString('en-US', {timeZone: 'Australia/Brisbane'}),
+    start2: new Date().toLocaleString('en-US', {
+      timeZone: 'Australia/Brisbane',
+    }),
+    end2: new Date().toLocaleString('en-US', {
+      timeZone: 'Australia/Brisbane',
+    }),
     penalty2: 0,
 
-    start3: new Date().toLocaleString('en-US', {timeZone: 'Australia/Brisbane'}),
-    end3: new Date().toLocaleString('en-US', {timeZone: 'Australia/Brisbane'}),
+    start3: new Date().toLocaleString('en-US', {
+      timeZone: 'Australia/Brisbane',
+    }),
+    end3: new Date().toLocaleString('en-US', {
+      timeZone: 'Australia/Brisbane',
+    }),
     penalty3: 0,
     rate: 1,
-    paid: false
+    paid: false,
   };
 
   employer: Employer = {
@@ -82,20 +96,18 @@ export class AddShiftModalPage implements OnInit {
   async ionViewWillEnter() {
     await this.getEmployersFromApi();
     await this.getLocationsFromApi();
-    // console.log(this.categories);
     this.startWasSelected = false;
     this.start2WasSelected = false;
     this.start3WasSelected = false;
   }
 
   addShift() {
-
     console.log(this.shift);
     this.shiftService.addShift(this.shift).subscribe(() => {
       const toast = this.toastCtrl.create({
         color: 'success',
         message: 'Shift Added',
-        position:'top',
+        position: 'top',
         duration: 2000,
       });
       toast.then((t) => t.present());
@@ -117,7 +129,6 @@ export class AddShiftModalPage implements OnInit {
     });
 
     modal.onDidDismiss().then(() => {
-      // console.log('I was dismissed');
       this.getEmployersFromApi();
     });
   }
@@ -136,7 +147,6 @@ export class AddShiftModalPage implements OnInit {
     });
 
     modal.onDidDismiss().then(() => {
-      // console.log('I was dismissed');
       this.getLocationsFromApi();
     });
   }
@@ -144,20 +154,14 @@ export class AddShiftModalPage implements OnInit {
   async getEmployersFromApi() {
     await this.shiftService.getEmployers().then((emp) => {
       this.employers = emp as Employer[];
-      // console.log('Emp from Api' + this.employers);
     });
   }
 
   async getLocationsFromApi() {
     await this.shiftService.getLocations().then((loc) => {
       this.locations = loc as Location[];
-      // console.log('Loc from Api' + loc);
     });
   }
-
-  // closeAddCategory() {
-  //   this.addingCategory = false;
-  // }
 
   close() {
     this.modalCtrl.dismiss();
@@ -172,18 +176,15 @@ export class AddShiftModalPage implements OnInit {
   }
 
   setMinEndDate(event: any) {
-    // console.log('I changed =' + event.detail.value);
     this.minTime = event.detail.value;
     this.startWasSelected = true;
   }
 
   setMinEndDate2(event: any) {
-    // console.log('I changed =' + event.detail.value);
     this.minTime2 = event.detail.value;
   }
 
   setMinEndDate3(event: any) {
-    // console.log('I changed =' + event.detail.value);
     this.minTime3 = event.detail.value;
   }
 
@@ -199,7 +200,5 @@ export class AddShiftModalPage implements OnInit {
     }
   }
 
-  getStatus(ev: any) {
-    // this.disableButton = false;
-}
+  getStatus(ev: any) {}
 }

@@ -3,16 +3,14 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
-
 export interface User {
   email: string;
   password: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class AuthService {
   currentUser = null;
 
@@ -20,9 +18,8 @@ export class AuthService {
   authMessage = new Subject<any>();
   private isAuthenticated = false;
 
-
   constructor(private router: Router, private auth: AngularFireAuth) {
-    this.auth.onAuthStateChanged(user => {
+    this.auth.onAuthStateChanged((user) => {
       if (user) {
         this.authSuccessfully();
       } else {
@@ -32,28 +29,28 @@ export class AuthService {
   }
 
   registerUser(authData: User) {
-    this.auth.createUserWithEmailAndPassword(authData.email, authData.password)
-    .then(result => {
-      console.log(result);
-      this.authSuccessfully();
-    })
-    .catch(error => {
-      console.log(error);
-    });
-
+    this.auth
+      .createUserWithEmailAndPassword(authData.email, authData.password)
+      .then((result) => {
+        console.log(result);
+        this.authSuccessfully();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   login(authData: User) {
-    this.auth.signInWithEmailAndPassword(authData.email, authData.password)
-    .then(result => {
-      console.log(result);
-      this.authSuccessfully();
-
-    })
-    .catch(error => {
-      console.log( 'error service ' + error);
-      this.sendErrorMessage(error);
-    });
+    this.auth
+      .signInWithEmailAndPassword(authData.email, authData.password)
+      .then((result) => {
+        console.log(result);
+        this.authSuccessfully();
+      })
+      .catch((error) => {
+        console.log('error service ' + error);
+        this.sendErrorMessage(error);
+      });
   }
 
   logout() {
@@ -63,7 +60,6 @@ export class AuthService {
     this.isAuthenticated = false;
   }
 
-
   isAuth() {
     return this.isAuthenticated;
   }
@@ -72,10 +68,9 @@ export class AuthService {
     this.isAuthenticated = true;
     this.authChange.next(true);
     this.router.navigate(['/menu/shifts-list']);
+  }
 
-}
-
-private sendErrorMessage(error) {
-  this.authMessage.next(error);
-}
+  private sendErrorMessage(error) {
+    this.authMessage.next(error);
+  }
 }

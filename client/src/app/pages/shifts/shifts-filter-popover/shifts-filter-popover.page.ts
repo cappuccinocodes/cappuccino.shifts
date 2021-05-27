@@ -56,29 +56,22 @@ export class ShiftsFilterPopoverPage implements OnInit {
   }
 
   onShowAllRecords() {
-    this.popoverCtrl.dismiss([
-      'all'
-    ]);
+    this.popoverCtrl.dismiss(['all']);
   }
 
   setMinEndDate(event: any) {
-    // console.log('I changed =' + event.detail.value);
     this.minTime = event.detail.value;
     this.dateEnd = event.detail.value;
   }
 
   select(selectedValue: any) {
     this.employerId = selectedValue.detail.value[0].id;
-    // console.log(selectedValue.detail.value);
     this.placeHolder = selectedValue.detail.value[0].name;
-
-    //this.selectedEmployer[0].icon = selectedValue.detail.value[0].icon;
   }
 
   chooseDates() {
     this.dateStartNumber = new Date(this.dateStart).setHours(0, 0, 0, 0);
     this.dateEndNumber = new Date(this.dateEnd).setHours(0, 0, 0, 0);
-    //this.popoverCtrl.dismiss({selected: [ this.dateStartNumber, this.dateEndNumber ]});
   }
 
   filter() {
@@ -86,8 +79,6 @@ export class ShiftsFilterPopoverPage implements OnInit {
       this.popoverCtrl.dismiss(['cat', this.employerId]);
     } else if (this.selectByDate) {
       this.chooseDates();
-      // console.log('dateStart: ' + this.dateStart);
-      // console.log('dateEnd: ' + this.dateEnd);
       this.popoverCtrl.dismiss([
         'date',
         0,
@@ -103,10 +94,7 @@ export class ShiftsFilterPopoverPage implements OnInit {
         this.dateEndNumber,
       ]);
     } else if (this.selectByStatus) {
-      this.popoverCtrl.dismiss([
-        'status',
-        this.status,
-      ]);
+      this.popoverCtrl.dismiss(['status', this.status]);
     }
   }
 
@@ -116,5 +104,3 @@ export class ShiftsFilterPopoverPage implements OnInit {
     });
   }
 }
-
-

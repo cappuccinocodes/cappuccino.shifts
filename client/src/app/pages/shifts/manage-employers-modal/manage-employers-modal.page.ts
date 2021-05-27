@@ -23,10 +23,9 @@ export class ManageEmployersModalPage implements OnInit {
     private modalCtrl: ModalController,
     private shiftsService: ShiftsService,
     private toastCtrl: ToastController
-  ) { }
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async ionViewWillEnter() {
     await this.getEmployers();
@@ -47,7 +46,6 @@ export class ManageEmployersModalPage implements OnInit {
   async getEmployers() {
     await this.shiftsService.getEmployers().then((cat) => {
       this.employers = cat as Employer[];
-      // console.log(this.employers[0].icon);
     });
   }
 
@@ -64,8 +62,11 @@ export class ManageEmployersModalPage implements OnInit {
   }
 
   deleteEmployer() {
-    // console.log('deleteEmployer ' + this.employerToDelete);
-    if (confirm('Are you sure? All shifts associated with this employer will be deleted.')){
+    if (
+      confirm(
+        'Are you sure? All shifts associated with this employer will be deleted.'
+      )
+    ) {
       this.shiftsService.deleteEmployer(this.employerToDelete).subscribe(
         (res) => {
           console.log('hurra');
@@ -84,5 +85,4 @@ export class ManageEmployersModalPage implements OnInit {
     this.deleteEmployerPlaceholder = selectedValue.detail.value[1];
     console.log('Index ' + this.employerToDelete);
   }
-
 }

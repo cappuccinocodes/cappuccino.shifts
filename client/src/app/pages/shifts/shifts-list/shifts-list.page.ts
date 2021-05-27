@@ -1,5 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonList, ModalController, PopoverController, SelectValueAccessor, ToastController } from '@ionic/angular';
+import {
+  IonList,
+  ModalController,
+  PopoverController,
+  SelectValueAccessor,
+  ToastController,
+} from '@ionic/angular';
 import { Shift, ShiftsService } from 'src/app/services/shifts.service';
 import { AddShiftModalPage } from '../add-shift-modal/add-shift-modal.page';
 import { ShiftsFilterPopoverPage } from '../shifts-filter-popover/shifts-filter-popover.page';
@@ -30,8 +36,6 @@ export class ShiftsListPage implements OnInit {
 
   ionViewWillEnter() {
     this.getShiftsFromApi();
-    // console.log('testDate = ' + this.testDate);
-
   }
 
   async addShift() {
@@ -54,8 +58,8 @@ export class ShiftsListPage implements OnInit {
   async updateShift(i) {
     const modal = await this.modalCtrl.create({
       component: UpdateShiftModalPage,
-      componentProps :{
-        shitId: i
+      componentProps: {
+        shitId: i,
       },
       cssClass: 'modalCss',
     });
@@ -71,55 +75,30 @@ export class ShiftsListPage implements OnInit {
     });
   }
 
-
-
   getShiftsFromApi() {
     this.shiftsService.getShifts().subscribe((shifts) => {
       this.shifts = shifts as Shift[];
       this.allShifts = shifts as Shift[];
 
-      // const almost = new Date(this.shifts[0].start);
-      // const date = new Date(this.shifts[0].start);
       this.shifts.forEach((value) => {
         console.log('shifts from database ' + value.paid);
       });
       console.log('end');
-      // console.log('Shifts: ' + this.shifts[0].start1);
       this.updateCashflow();
-      // console.log('Date test ' + date.getTime());
-      // console.log('Date test ' + almost);
-
-      // const toast = this.toastCtrl.create({
-      //   color: 'success',
-      //   message: 'Shifts loaded',
-      //   position:'top',
-      //   duration: 2000,
-      // });
-      // toast.then((t) => t.present());
-
     });
   }
 
   removeShift(i) {
-    // const toast = this.toastCtrl.create({
-    //     color: 'danger',
-    //     message: 'Are you sure?',
-    //     position:'top',
-    //     buttons:[('Yes'), ('No')]
-    //   });
-    //   toast.then((t) => t.present());
-
-    if (confirm('Are you sure?'))
-    {
+    if (confirm('Are you sure?')) {
       console.log('delete pressed');
-    this.shiftsService.deleteShift(i).subscribe(
-      (res) => {
-        this.getShiftsFromApi();
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+      this.shiftsService.deleteShift(i).subscribe(
+        (res) => {
+          this.getShiftsFromApi();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     }
     this.slidingList.closeSlidingItems();
     this.updateCashflow();
@@ -160,41 +139,26 @@ export class ShiftsListPage implements OnInit {
         this.shifts = this.allShifts.filter(
           (shift) => shift.employerId === selectedEmployerId
         );
-
       } else if (res.data[0] === 'date') {
-        // console.log('filtering by date');
-        // console.log('start' + selectedDateStart);
-        // console.log('end' + selectedDateEnd);
-        // console.log(
-        //   'target' + new Date(this.shifts[0].start).getTime()
-        // );
-
         this.shifts = this.allShifts.filter(
           (shift) =>
             new Date(shift.start1).getTime() >= selectedDateStart &&
             new Date(shift.start1).getTime() <= selectedDateEnd
         );
-
-
       } else if (res.data[0] === 'dat&cat') {
-        // console.log('filtering by date and cat');
-        //  console.log('start' + selectedDateStart);
-        //  console.log('end' + selectedDateEnd);
         this.shifts = this.allShifts.filter(
           (shift) =>
-            new Date(shift.start1).getTime() >= selectedDateStart
-            && new Date(shift.start1).getTime() <= selectedDateEnd
-            && shift.employerId === selectedEmployerId
+            new Date(shift.start1).getTime() >= selectedDateStart &&
+            new Date(shift.start1).getTime() <= selectedDateEnd &&
+            shift.employerId === selectedEmployerId
         );
       } else if (res.data[0] === 'status') {
         selectedStatus = res.data[1];
         this.shifts = this.allShifts.filter(
-          (shift) =>
-            shift.paid === selectedStatus
+          (shift) => shift.paid === selectedStatus
         );
       }
 
-      // console.log('shifts after filter: ', this.shifts);
       this.updateFilteredCashflow();
     });
   }

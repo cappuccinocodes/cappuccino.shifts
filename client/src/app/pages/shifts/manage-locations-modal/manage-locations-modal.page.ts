@@ -8,7 +8,6 @@ import { Location, ShiftsService } from 'src/app/services/shifts.service';
   styleUrls: ['./manage-locations-modal.page.scss'],
 })
 export class ManageLocationsModalPage implements OnInit {
-
   locations = [];
   deletingLocations = false;
   deleteLocationPlaceholder = 'Select Location to Delete';
@@ -24,14 +23,12 @@ export class ManageLocationsModalPage implements OnInit {
     private modalCtrl: ModalController,
     private shiftsService: ShiftsService,
     private toastCtrl: ToastController
-  ) { }
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async ionViewWillEnter() {
     await this.getLocations();
-    // console.log(this.locations);
   }
 
   addLocation() {
@@ -48,7 +45,6 @@ export class ManageLocationsModalPage implements OnInit {
   async getLocations() {
     await this.shiftsService.getLocations().then((loc) => {
       this.locations = loc as Location[];
-      // console.log(this.locations[0].icon);
     });
   }
 
@@ -65,7 +61,11 @@ export class ManageLocationsModalPage implements OnInit {
   }
 
   deleteLocation() {
-    if (confirm('Are you sure? All shifts associated with this employer will be deleted.')){
+    if (
+      confirm(
+        'Are you sure? All shifts associated with this employer will be deleted.'
+      )
+    ) {
       this.shiftsService.deleteLocation(this.locationToDelete).subscribe(
         (res) => {
           console.log('hurra');
@@ -84,5 +84,4 @@ export class ManageLocationsModalPage implements OnInit {
     this.deleteLocationPlaceholder = selectedValue.detail.value[1];
     console.log('Index ' + this.locationToDelete);
   }
-
 }
